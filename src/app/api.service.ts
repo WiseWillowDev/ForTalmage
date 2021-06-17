@@ -18,6 +18,6 @@ export class ApiService {
   }
 
   public getTestingFromFlask(gamerTag: string): Observable<DataWrapper> {
-    return this.http.get<DataWrapper>(`http://fortalmage.uc.r.appspot.com/gamertag/${gamerTag}`)
+    return this.http.get<DataWrapper>(`https://fortalmage.uc.r.appspot.com/gamertag/${gamerTag}`)
   }
 }
