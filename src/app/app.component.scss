@@ -1,0 +1,23 @@
+
+.talmage {
+    text-align: center;
+}
+
+
+::ng-deep .mat-grid-tile-content {
+    flex-direction: column;
+}
+
+::ng-deep .mat-input-element {
+    height: 16px;
+}
+
+mat-list {
+    flex-grow: 1;
+    overflow: auto;
+}
+
+.DateForm {
+    display: flex;
+    flex-direction: column;
+}
