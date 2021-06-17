@@ -48,7 +48,7 @@
     <mat-card *ngIf="rulesForm.controls.startTime.valid">Time : {{rulesForm.controls.startTime.value}}</mat-card>
     <mat-card *ngIf="rulesForm.controls.timeDuration.valid">Duration : {{rulesForm.controls.timeDuration.value}} Minutes</mat-card>
     
-    <button mat-raised-button color="primary" (click)="killerWhales()" [disabled]="!rulesForm.valid">Calculate Results</button>
+    <button mat-raised-button color="primary" (click)="getScores()" [disabled]="!rulesForm.valid">Calculate Results</button>
 
   </mat-grid-tile>
 </mat-grid-list>

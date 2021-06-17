@@ -44,9 +44,9 @@ export class AppComponent implements OnInit {
     return gamerObj;
   }
 
-  killerWhales(): void {
+  getScores(): void {
     this.gamers.forEach(gamer => {
-      this.apiService.getTestingFromFlask(gamer.gamerTag).subscribe((data: DataWrapper | ApiErrorWrapper) => {
+      this.apiService.getDataForGamer(gamer.gamerTag).subscribe((data: DataWrapper | ApiErrorWrapper) => {
         console.log(gamer);
         console.log(data);
         if ('data' in data) {
