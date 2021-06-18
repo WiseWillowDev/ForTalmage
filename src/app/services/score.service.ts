@@ -1,10 +1,25 @@
 import { Injectable } from '@angular/core';
 import { DataWrapper, Match } from '../interfaces/data-wrapper.interface';
+import { PointValue } from '../interfaces/point.interface';
 
 @Injectable({
   providedIn: 'root'
 })
 export class ScoreService {
+
+  pointValues: PointValue = {
+    killValue: 10,
+    placementValueArray: [100, 60, 40, 35, 30, 25, 20, 15, 10, 5]
+  }
+
+  public getPointValues(): PointValue {
+    return this.pointValues;
+  }
+
+  public updatePointValues(newValues: PointValue): void {
+    this.pointValues = newValues;
+  }
+
 
   public getScore(data: DataWrapper): number {
     const relaventMatches = this.getRelaventMatches(data.data.matches);
@@ -27,11 +42,14 @@ export class ScoreService {
   }
 
   public getScoreFromKills(kills: number): number {
-    return kills * 10;
+    return kills * this.pointValues.killValue;
   }
 
   public getScoreFromPlacement(placement: number): number {
-    return 100 - placement;
+    if (placement > 10) {
+      return 0
+    } 
+    return this.pointValues.placementValueArray[placement-1];
   }
 
   public getKillsFromMatch(match: Match): number {

@@ -23,8 +23,9 @@ import { ContentComponent } from './content/content.component';
 import { PointSystemComponent } from './point-system/point-system.component';
 import { GamerListComponent } from './gamer-list/gamer-list.component';
 import { TournmentTimeComponent } from './tournment-time/tournment-time.component';
-import { ResultsComponent } from './results/results.component';
 import { HeaderComponent } from './header/header.component';
+import { MatTableModule } from '@angular/material/table';
+import { MatPaginatorModule } from '@angular/material/paginator';
 
 @NgModule({
   declarations: [
@@ -34,7 +35,6 @@ import { HeaderComponent } from './header/header.component';
     PointSystemComponent,
     GamerListComponent,
     TournmentTimeComponent,
-    ResultsComponent,
     HeaderComponent
   ],
   imports: [
@@ -53,7 +53,9 @@ import { HeaderComponent } from './header/header.component';
     MatDatepickerModule,
     MatNativeDateModule,
     MatSidenavModule,
-    MatSelectModule
+    MatSelectModule,
+    MatTableModule,
+    MatPaginatorModule
   ],
   providers: [],
   bootstrap: [AppComponent]
