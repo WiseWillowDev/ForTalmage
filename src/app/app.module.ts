@@ -13,14 +13,29 @@ import { MatFormFieldModule } from '@angular/material/form-field'
 import { MatButtonModule } from '@angular/material/button'
 import { MatSliderModule } from '@angular/material/slider'
 import { MatDatepickerModule } from '@angular/material/datepicker'
+import { MatSidenavModule } from '@angular/material/sidenav'
 
 import { ReactiveFormsModule } from '@angular/forms';
 import { MatNativeDateModule } from '@angular/material/core';
-
+import { SideNavComponent } from './side-nav/side-nav.component';
+import { MatSelectModule } from '@angular/material/select';
+import { ContentComponent } from './content/content.component';
+import { PointSystemComponent } from './point-system/point-system.component';
+import { GamerListComponent } from './gamer-list/gamer-list.component';
+import { TournmentTimeComponent } from './tournment-time/tournment-time.component';
+import { ResultsComponent } from './results/results.component';
+import { HeaderComponent } from './header/header.component';
 
 @NgModule({
   declarations: [
-    AppComponent
+    AppComponent,
+    SideNavComponent,
+    ContentComponent,
+    PointSystemComponent,
+    GamerListComponent,
+    TournmentTimeComponent,
+    ResultsComponent,
+    HeaderComponent
   ],
   imports: [
     BrowserModule,
@@ -36,7 +51,9 @@ import { MatNativeDateModule } from '@angular/material/core';
     MatButtonModule,
     MatSliderModule,
     MatDatepickerModule,
-    MatNativeDateModule
+    MatNativeDateModule,
+    MatSidenavModule,
+    MatSelectModule
   ],
   providers: [],
   bootstrap: [AppComponent]

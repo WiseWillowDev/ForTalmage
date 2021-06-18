@@ -1,0 +1,54 @@
+<mat-card class="Talmage">For Talmage</mat-card>
+<mat-grid-list cols="2" rowHeight="2:1">
+  <mat-grid-tile class="form-display" rowspan="2">
+    <mat-list>
+      <mat-list-item *ngFor="let gamer of gamers"> {{gamer.gamerTag}} {{gamer.score}} </mat-list-item>
+    </mat-list>
+    <form class="example-form" [formGroup]="gamerForm">
+      <mat-form-field class="example-full-width">
+        <mat-label>Add Gamer</mat-label>
+        <input matInput type="text" formControlName="gamer" placeholder="Whos ganna win?...">
+      </mat-form-field>
+    </form>
+    <button mat-raised-button color="primary" (click)="addGamer()" >Add Gamer</button>
+  </mat-grid-tile>
+  <mat-grid-tile>
+    <mat-card>Custom Rules Here 1 for start date, 1 for duration, 1 for points</mat-card>
+
+    <form class="DateForm" [formGroup]="rulesForm">
+
+      <mat-form-field appearance="fill">
+        <mat-label>Choose a date</mat-label>
+        <input matInput [matDatepicker]="picker" formControlName="startDate">
+        <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+        <mat-datepicker #picker></mat-datepicker>
+      </mat-form-field>
+
+      <mat-form-field class="example-full-width">
+        <mat-label>Add Gamer</mat-label>
+          <input matInput type="time" formControlName='startTime'>
+      </mat-form-field>
+
+      <mat-slider
+        thumbLabel
+        step="5"
+        min="5"
+        max="300"
+        formControlName="timeDuration"
+        aria-label="units">
+      </mat-slider>  
+
+    </form>
+
+  </mat-grid-tile>
+  <mat-grid-tile>
+    <mat-card>Results</mat-card>
+    
+    <mat-card *ngIf="rulesForm.controls.startDate.valid">Day : {{rulesForm.controls.startDate.value}}</mat-card>
+    <mat-card *ngIf="rulesForm.controls.startTime.valid">Time : {{rulesForm.controls.startTime.value}}</mat-card>
+    <mat-card *ngIf="rulesForm.controls.timeDuration.valid">Duration : {{rulesForm.controls.timeDuration.value}} Minutes</mat-card>
+    
+    <button mat-raised-button color="primary" (click)="getScores()" [disabled]="!rulesForm.valid">Calculate Results</button>
+
+  </mat-grid-tile>
+</mat-grid-list>

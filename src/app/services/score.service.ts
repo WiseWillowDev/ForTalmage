@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { DataWrapper, Match } from './data-wrapper.interface';
+import { DataWrapper, Match } from '../interfaces/data-wrapper.interface';
 
 @Injectable({
   providedIn: 'root'

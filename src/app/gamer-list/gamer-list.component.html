@@ -1,0 +1,10 @@
+<mat-list>
+    <mat-list-item *ngFor="let gamer of gamers"> {{gamer.gamerTag}} {{gamer.score}} </mat-list-item>
+</mat-list>
+<form class="example-form" [formGroup]="gamerForm">
+    <mat-form-field class="example-full-width">
+    <mat-label>Add Gamer</mat-label>
+    <input matInput type="text" formControlName="gamer" placeholder="Whos ganna win?...">
+    </mat-form-field>
+</form>
+<button mat-raised-button color="primary" (click)="addGamer()" >Add Gamer</button>

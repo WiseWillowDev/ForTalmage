@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
-import { HttpClient, HttpHeaders } from '@angular/common/http';
-import { DataWrapper } from './data-wrapper.interface';
+import { HttpClient } from '@angular/common/http';
+import { DataWrapper } from '../interfaces/data-wrapper.interface';
 
 @Injectable({
   providedIn: 'root'
@@ -12,12 +12,8 @@ export class ApiService {
 
   constructor(private readonly http: HttpClient) { }
 
-
-  public getStuff(gametag: string): Observable<any> {
-    return this.http.get(`${this.endpoint}${gametag}?type=wz`);
-  }
-
-  public getTestingFromFlask(gamerTag: string): Observable<DataWrapper> {
+  public getDataForGamer(gamerTag: string): Observable<DataWrapper> {
+    // return this.http.get<DataWrapper>(`http://localhost:5000/${gamerTag}`)
     return this.http.get<DataWrapper>(`https://fortalmage.uc.r.appspot.com/gamertag/${gamerTag}`)
   }
 }

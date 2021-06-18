@@ -1,0 +1,27 @@
+<mat-drawer-container class="nav-container" hasBackdrop="true" autosize>
+    <mat-drawer #drawer class="nav-sidenav" mode="over">
+        <div class="">
+            <h1 class="drawer-title">NAVIGATION</h1>
+            <button mat-raised-button color="primary" class="link" (click)="drawer.toggle()" (click)="navigate('')">DashBoard</button>
+            <button mat-raised-button color="primary" class="link" (click)="drawer.toggle()" (click)="navigate('gamers')">add gamers</button>
+            <button mat-raised-button color="primary" class="link" (click)="drawer.toggle()" (click)="navigate('points')">point system</button>
+            <button mat-raised-button color="primary" class="link" (click)="drawer.toggle()" (click)="navigate('start')">Tournament</button>
+            <button mat-raised-button color="primary" class="link" (click)="drawer.toggle()" (click)="navigate('results')">results</button>
+        </div>
+    </mat-drawer>
+
+    <div class="header">
+        <div class="menu-button" (click)="drawer.toggle()">
+            <div class="black-line"></div>
+            <div class="white-line"></div>
+            <div class="black-line"></div>
+            <div class="white-line"></div>
+            <div class="black-line"></div>
+        </div>
+        <div class="main-title">WarZone Stats</div>
+    </div>
+
+    <div class="content">
+        <router-outlet></router-outlet>
+    </div>
+</mat-drawer-container>
