@@ -23,18 +23,23 @@ export class ScoreService {
 
   public getScore(data: DataWrapper): number {
     const relaventMatches = this.getRelaventMatches(data.data.matches);
-    let totalKills = 0;
     let finalScore = 0;
     relaventMatches.forEach(match => {
-      totalKills = totalKills + this.getKillsFromMatch(match);
       const matchPlacement = this.getPlacementFromMatch(match); 
       finalScore = finalScore + this.getScoreFromPlacement(matchPlacement);     
     })
-    console.log(finalScore);
-    console.log(totalKills);
+    const totalKills = this.getTotalKills(data);
     finalScore = finalScore + this.getScoreFromKills(totalKills)
-    console.log(finalScore);
     return finalScore;
+  }
+
+  public getTotalKills(data: DataWrapper): number {
+    const relaventMatches = this.getRelaventMatches(data.data.matches);
+    let totalKills = 0;
+    relaventMatches.forEach(match => {
+      totalKills = totalKills + this.getKillsFromMatch(match);
+    })
+    return totalKills;
   }
 
   public getRelaventMatches(data: Match[]): Match[] {

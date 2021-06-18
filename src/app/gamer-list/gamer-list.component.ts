@@ -6,6 +6,7 @@ import { DataWrapper } from '../interfaces/data-wrapper.interface';
 import { ApiErrorWrapper } from '../interfaces/error.interface';
 import { Gamer } from '../interfaces/gamer.interface';
 import { ApiService } from '../services/api.service';
+import { GamersService } from '../services/gamers.service';
 import { ScoreService } from '../services/score.service';
 
 @Component({
@@ -27,49 +28,30 @@ export class GamerListComponent implements OnInit, AfterViewInit {
   dataSource = new MatTableDataSource<Gamer>(this.gamers);
   dataSource2 = this.dataSource.connect();
 
-  constructor(private readonly apiService: ApiService, private readonly scoreService: ScoreService) { }
+  constructor(
+    private readonly gamerService: GamersService
+  ) { }
 
   ngOnInit(): void {
-    this.gamers.push(this.createGamer('LilChiimpi'));
-    // this.dataSource2.next(this.gamers)
+    this.gamerService.getGamers().subscribe(gamers => {
+      this.dataSource2.next(gamers)
+    })
   }
 
   ngAfterViewInit() {
     this.dataSource.paginator = this.paginator;
-    console.log(this.dataSource)
+    this.gamerService.addGamerByGamerTag('LilChiimpi');
+    this.gamerService.refreshGamer$();
   }
 
   addGamer(): void {
     if (this.gamerForm.valid) {
-      this.gamers.push(this.createGamer(this.gamerForm.controls.gamer.value));
-      this.dataSource2.next(this.gamers)
-      // console.log(this.dataSource.paginator?.page)
-      // console.log(this.dataSource.paginator?.pageSizeOptions)
-      // this.dataSource._updatePaginator
+      this.gamerService.addGamerByGamerTag(this.gamerForm.controls.gamer.value);
     }
   }
 
-  createGamer(tag: string): Gamer {
-    const gamerObj: Gamer = {gamerTag: tag, score: 0, kills: 0};
-    return gamerObj;
-  }
-
   getScores(): void {
-    this.gamers.forEach(gamer => {
-      this.apiService.getDataForGamer(gamer.gamerTag).subscribe((data: DataWrapper | ApiErrorWrapper) => {
-        console.log(gamer);
-        console.log(data);
-        if ('data' in data) {
-          gamer.score = this.scoreService.getScore(data);
-          
-        } else if ('errors' in data) { 
-          gamer.score = 0;
-          gamer.gamerTag = 'X:--' + gamer.gamerTag + '--:X'
-          console.log('there was an error');
-        }
-      })
-    })
-    this.dataSource2.next(this.gamers)
+    this.gamerService.calculateScore();
   }
 
 }
