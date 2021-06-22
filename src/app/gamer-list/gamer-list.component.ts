@@ -14,8 +14,7 @@ import { ScoreService } from '../services/score.service';
   templateUrl: './gamer-list.component.html',
   styleUrls: ['./gamer-list.component.scss']
 })
-export class GamerListComponent implements OnInit, AfterViewInit {
-  @ViewChild(MatPaginator) paginator: MatPaginator | null = null;
+export class GamerListComponent implements OnInit {
 
   gamers: Gamer[] = [];
 
@@ -23,7 +22,7 @@ export class GamerListComponent implements OnInit, AfterViewInit {
     gamer: new FormControl('', Validators.required)
   });
 
-  displayedColumns: string[] = ['gamerTag', 'score', 'kills'];
+  displayedColumns: string[] = ['gamerTag', 'score', 'kills', 'matches'];
 
   dataSource = new MatTableDataSource<Gamer>(this.gamers);
   dataSource2 = this.dataSource.connect();
@@ -36,12 +35,8 @@ export class GamerListComponent implements OnInit, AfterViewInit {
     this.gamerService.getGamers().subscribe(gamers => {
       this.dataSource2.next(gamers)
     })
-  }
-
-  ngAfterViewInit() {
-    this.dataSource.paginator = this.paginator;
     this.gamerService.addGamerByGamerTag('LilChiimpi');
-    this.gamerService.refreshGamer$();
+    this.gamerService.refreshGamer$()
   }
 
   addGamer(): void {

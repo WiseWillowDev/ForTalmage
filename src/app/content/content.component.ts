@@ -40,7 +40,7 @@ export class ContentComponent implements OnInit {
   }
 
   createGamer(tag: string): Gamer {
-    const gamerObj: Gamer = {gamerTag: tag, score: 0, kills: 0};
+    const gamerObj: Gamer = {gamerTag: tag, score: 0, kills: 0, matches: []};
     return gamerObj;
   }
 

@@ -37,7 +37,7 @@ export class GamersService {
   }
 
   private createGamer(tag: string): Gamer {
-    const gamerObj: Gamer = {gamerTag: tag, score: 0, kills: 0};
+    const gamerObj: Gamer = {gamerTag: tag, score: 0, kills: 0, matches: []};
     return gamerObj;
   }
 
@@ -51,6 +51,7 @@ export class GamersService {
         if ('data' in data) {
           gamer.score = this.scoreService.getScore(data);
           gamer.kills = this.scoreService.getTotalKills(data);
+          gamer.matches = this.scoreService.getRelaventMatches(data.data.matches);
         } else if ('errors' in data) { 
           gamer.score = 0;
           gamer.gamerTag = gamer.gamerTag + '--UNAVAILABLE'

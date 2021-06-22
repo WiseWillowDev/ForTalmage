@@ -1,11 +1,14 @@
-import { Injectable } from '@angular/core';
+import { Injectable, ɵSWITCH_COMPILE_NGMODULE__POST_R3__ } from '@angular/core';
 import { DataWrapper, Match } from '../interfaces/data-wrapper.interface';
 import { PointValue } from '../interfaces/point.interface';
+import { TournamentTimeService } from './tournament-time.service';
 
 @Injectable({
   providedIn: 'root'
 })
 export class ScoreService {
+
+  constructor(private readonly tournamentTime: TournamentTimeService) {}
 
   pointValues: PointValue = {
     killValue: 10,
@@ -42,8 +45,20 @@ export class ScoreService {
     return totalKills;
   }
 
-  public getRelaventMatches(data: Match[]): Match[] {
-    return data;
+  public getRelaventMatches(matches: Match[]): Match[] {
+    const new_data: Match[] = [];
+
+    const time_limits = this.tournamentTime.getDateAndTime()
+    const start_limit_date = new Date(`${time_limits.startDate} ${time_limits.startTime}`);
+    const end_limit_date = new Date(start_limit_date.getTime() + time_limits.duration*60000);
+    
+    matches.forEach(match => {
+      const new_time = new Date(match.metadata.timestamp);
+      if (new_time >= start_limit_date && end_limit_date >= new_time) {
+        new_data.push(match);
+      }
+    })
+    return new_data;
   }
 
   public getScoreFromKills(kills: number): number {
